@@ -1,0 +1,80 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $num1 = $_POST['num1'];
+    $num2 = $_POST['num2'];
+    $operator = $_POST['operator'];
+
+    // Realizar cálculos según el operador
+    switch ($operator) {
+        case '+':
+            $result = $num1 + $num2;
+            break;
+        case '-':
+            $result = $num1 - $num2;
+            break;
+        case '*':
+            $result = $num1 * $num2;
+            break;
+        case '/':
+            if ($num2 != 0) {
+                $result = $num1 / $num2;
+            } else {
+                $result = "Error: División entre cero.";
+            }
+            break;
+        default:
+            $result = "Operador inválido.";
+    }
+} else {
+    $result = "";
+}
+?>
+
+<!DOCTYPE html>
+<html lang="sp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="calculator">
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+            <input type="text" name="num1" value="<?php echo isset($_POST['num1']) ? $_POST['num1'] : ''; ?>" disabled>
+            <div class="buttons">
+                <div class="row">
+                    <button type="submit" name="operator" value="+"><i class="fas fa-plus"></i></button>
+                    <button type="submit" name="operator" value="-"><i class="fas fa-minus"></i></button>
+                    <button type="submit" name="operator" value="*"><i class="fas fa-times"></i></button>
+                    <button type="submit" name="operator" value="/"><i class="fas fa-divide"></i></button>
+                </div>
+                <div class="row">
+                    <button type="submit" name="num1" value="7">7</button>
+                    <button type="submit" name="num1" value="8">8</button>
+                    <button type="submit" name="num1" value="9">9</button>
+                </div>
+                <div class="row">
+                    <button type="submit" name="num1" value="4">4</button>
+                    <button type="submit" name="num1" value="5">5</button>
+                    <button type="submit" name="num1" value="6">6</button>
+                </div>
+                <div class="row">
+                    <button type="submit" name="num1" value="1">1</button>
+                    <button type="submit" name="num1" value="2">2</button>
+                    <button type="submit" name="num1" value="3">3</button>
+                </div>
+                <div class="row">
+                    <button type="submit" name="num1" value="0">0</button>
+                    <button type="submit" name="num1" value=".">.</button>
+                </div>
+            </div>
+        </form>
+        <div class="result">
+            <p>Resultado: <?php echo $result; ?></p>
+        </div>
+    </div>
+</body>
+</html>
