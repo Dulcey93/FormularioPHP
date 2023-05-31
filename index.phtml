@@ -44,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="calculator">
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
             <input type="text" name="num1" value="<?php echo isset($_POST['num1']) ? $_POST['num1'] : ''; ?>" disabled>
+            <input type="hidden" name="result" value="<?php echo $result; ?>">
             <div class="buttons">
                 <div class="row">
                     <button type="submit" name="operator" value="+"><i class="fas fa-plus"></i></button>
@@ -70,10 +71,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <button type="submit" name="num1" value="0">0</button>
                     <button type="submit" name="num1" value=".">.</button>
                 </div>
+                <div class="row">
+                    <button type="submit" name="operator" value="="><i class="fas fa-equals"></i></button>
+                </div>
             </div>
         </form>
         <div class="result">
-            <p>Resultado: <?php echo $result; ?></p>
+            <p>Resultado: <?php echo isset($_POST['result']) ? $_POST['result'] : ''; ?></p>
         </div>
     </div>
 </body>
