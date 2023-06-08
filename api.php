@@ -92,7 +92,7 @@ if (isset($_POST["borrarUno"])) {
             </g>
         </svg>
     </div>
-    
+    <div class="container">
     <form action="api.php" method="POST" id="calculator">
         <input type="text" class="pantalla" name="inputNumerico" value="<?php echo isset($_SESSION['Numeros']) ? $_SESSION['Numeros'] : '0'; ?>" readonly>
         <br>
@@ -135,5 +135,7 @@ if (isset($_POST["borrarUno"])) {
             </tr>
         </table>
     </form>
+    </div>
+    
 </body>
 </html>
