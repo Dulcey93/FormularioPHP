@@ -37,9 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "-" => strval($num1 - $num2),
             "*" => strval($num1 * $num2),
             "/" => strval($num2 == "0" ? $num1 : $num1 / $num2),
-            "1/x" => strval($num1 == "0" ? $num1 : "1" / $num1),
-            "x^2" => strval($num1 ** "2"),
-            "√x" => strval(sqrt($num1)),
             "%" => strval(sqrt($num2 == "0" ? $num1 : $num1 % $num2)),
             default => $num1,
         };
@@ -77,65 +74,60 @@ if (isset($_POST["borrarUno"])) {
     <title>Calculadora</title>
 </head>
 <body>
-    <div class="container">
-        <svg viewBox="0 0 960 300">
-            <symbol id="s-text">
-                <text text-anchor="middle" x="50%" y="80%">Calculadora</text>
-            </symbol>
-    
-            <g class="g-ants">
-                <use xlink:href="#s-text" class="text-copy"></use>
-                <use xlink:href="#s-text" class="text-copy"></use>
-                <use xlink:href="#s-text" class="text-copy"></use>
-                <use xlink:href="#s-text" class="text-copy"></use>
-                <use xlink:href="#s-text" class="text-copy"></use>
-            </g>
-        </svg>
-    </div>
-    <div class="container">
-    <form action="api.php" method="POST" id="calculator">
-        <input type="text" class="pantalla" name="inputNumerico" value="<?php echo isset($_SESSION['Numeros']) ? $_SESSION['Numeros'] : '0'; ?>" readonly>
-        <br>
-        <table>
-            <tr>
-                <td><button class="botonCal" type="submit" name="operacion" value="%">  % </button></td>
-                <td><button class="botonCal" type="submit" name="borrar" value="C">  C </button></td>
-                <td><button class="botonCal" type="submit" name="borrar" value="CE">  CE </button></td>
-                <td><button class="botonCal" type="submit" name="borrarUno" value="borrarUno">  <- </button></td>
-            </tr>
-            <tr>
-                <td><button class="botonCal" type="submit" name="operacion" value="1/x"> 1/x </button></td>
-                <td><button class="botonCal" type="submit" name="operacion" value="x^2"> x^2 </button></td>
-                <td><button class="botonCal" type="submit" name="operacion" value="√x"> √x </button></td>
-                <td><button class="botonCal" type="submit" name="operacion" value="/"> / </button></td>
-            </tr>
-            <tr>
-                <td><button class="botonCal" type="submit" name="numero" value="7"> 7 </button></td>
-                <td><button class="botonCal" type="submit" name="numero" value="8"> 8 </button></td>
-                <td><button class="botonCal" type="submit" name="numero" value="9"> 9 </button></td>
-                <td><button class="botonCal" type="submit" name="operacion" value="*"> X </button></td>
-            </tr>
-            <tr>
-                <td><button class="botonCal" type="submit" name="numero" value="4"> 4 </button></td>
-                <td><button class="botonCal" type="submit" name="numero" value="5"> 5 </button></td>
-                <td><button class="botonCal" type="submit" name="numero" value="6"> 6 </button></td>
-                <td><button class="botonCal" type="submit" name="operacion" value="-"> - </button></td>
-            </tr>
-            <tr>
-                <td><button class="botonCal" type="submit" name="numero" value="1"> 1 </button></td>
-                <td><button class="botonCal" type="submit" name="numero" value="2"> 2 </button></td>
-                <td><button class="botonCal" type="submit" name="numero" value="3"> 3 </button></td>
-                <td><button class="botonCal" type="submit" name="operacion" value="+"> + </button></td>
-            </tr>
-            <tr>
-                <td><button class="botonCal" type="submit" name="N/P" value="-/+">  -/+ </button></td>
-                <td><button class="botonCal" type="submit" name="numero" value="0"> 0 </button></td>
-                <td><button class="botonCal" type="submit" name="numero" value="."> . </button></td>
-                <td><button class="botonCal" type="submit" name="Resultado" value="="> = </button></td>
-            </tr>
-        </table>
-    </form>
-    </div>
-    
+    <div class="contenedor">
+        <div class="container">
+            <svg viewBox="0 0 960 300">
+                <symbol id="s-text">
+                    <text text-anchor="middle" x="50%" y="80%">Calculadora</text>
+                </symbol>
+        
+                <g class="g-ants">
+                    <use xlink:href="#s-text" class="text-copy"></use>
+                    <use xlink:href="#s-text" class="text-copy"></use>
+                    <use xlink:href="#s-text" class="text-copy"></use>
+                    <use xlink:href="#s-text" class="text-copy"></use>
+                    <use xlink:href="#s-text" class="text-copy"></use>
+                </g>
+            </svg>
+        </div>
+        <div class="container container-form">
+        <form action="api.php" method="POST" id="calculator">
+            <input type="text" class="pantalla" name="inputNumerico" value="<?php echo isset($_SESSION['Numeros']) ? $_SESSION['Numeros'] : '0'; ?>" readonly>
+            <br>
+            <table>
+                <tr>
+                    <td><button class="botonCal" type="submit" name="operacion" value="%">  % </button></td>
+                    <td><button class="botonCal" type="submit" name="borrar" value="C">  C </button></td>
+                    <td><button class="botonCal" type="submit" name="borrarUno" value="borrarUno">  <- </button></td>
+                    <td><button class="botonCal" type="submit" name="operacion" value="/"> / </button></td>
+                </tr>
+                <tr>
+                    <td><button class="botonCal" type="submit" name="numero" value="7"> 7 </button></td>
+                    <td><button class="botonCal" type="submit" name="numero" value="8"> 8 </button></td>
+                    <td><button class="botonCal" type="submit" name="numero" value="9"> 9 </button></td>
+                    <td><button class="botonCal" type="submit" name="operacion" value="*"> X </button></td>
+                </tr>
+                <tr>
+                    <td><button class="botonCal" type="submit" name="numero" value="4"> 4 </button></td>
+                    <td><button class="botonCal" type="submit" name="numero" value="5"> 5 </button></td>
+                    <td><button class="botonCal" type="submit" name="numero" value="6"> 6 </button></td>
+                    <td><button class="botonCal" type="submit" name="operacion" value="-"> - </button></td>
+                </tr>
+                <tr>
+                    <td><button class="botonCal" type="submit" name="numero" value="1"> 1 </button></td>
+                    <td><button class="botonCal" type="submit" name="numero" value="2"> 2 </button></td>
+                    <td><button class="botonCal" type="submit" name="numero" value="3"> 3 </button></td>
+                    <td><button class="botonCal" type="submit" name="operacion" value="+"> + </button></td>
+                </tr>
+                <tr>
+                    <td><button class="botonCal" type="submit" name="N/P" value="-/+">  -/+ </button></td>
+                    <td><button class="botonCal" type="submit" name="numero" value="0"> 0 </button></td>
+                    <td><button class="botonCal" type="submit" name="numero" value="."> . </button></td>
+                    <td><button class="botonCal" type="submit" name="Resultado" value="="> = </button></td>
+                </tr>
+            </table>
+        </form>
+        </div>
+    </div>    
 </body>
 </html>
